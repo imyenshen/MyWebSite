@@ -1,0 +1,30 @@
+<ul nz-menu nzMode="inline" class="sider-menu">
+    
+    <li nz-submenu nzOpen nzTitle="基本資料" nzIcon="user">
+
+        <!-- 讀陣列長出來 -->
+        <ul *ngFor="let item of basicArray; let serialNo = index;">
+
+            <li nz-menu-item>
+                <a [routerLink]=item.url>
+                    <span>{{serialNo}} . {{ item.text }}</span>
+                </a>
+            </li>
+        </ul>
+        
+        <!-- 手動長出來
+        <ul>
+            <li nz-menu-item nzSelected>
+                <a [routerLink]="['/item1']">
+                    <span>項目1</span>
+                </a>
+            </li>
+            <li nz-menu-item>
+                <a [routerLink]="['/item2']">
+                    <span>項目2</span>
+                </a>
+            </li>
+        </ul> 
+        -->
+    </li>
+</ul>
