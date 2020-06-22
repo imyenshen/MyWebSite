@@ -1,6 +1,41 @@
-<p>台灣股票</p>
+<!-- <p>台灣股票</p> -->
 
-<table cellpadding="5" border='1' >
+<nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+    <input nz-input type="text" placeholder="輸入股票代號" />
+</nz-input-group>
+<ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="doSearch()"><i nz-icon nzType="search"></i></button>
+</ng-template>
+
+<br />
+<br />
+
+<nz-table nzBordered nzTitle="台灣股票" [nzData]="msgArray">
+    <thead>
+        <tr>
+            <th *ngFor="let title of titles;">{{title}}</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let stock of msgArray; let serialNo = index;">
+            <td>{{serialNo+1}}</td>
+            <td>{{stock.c}}</td>
+            <td>{{stock.n}}</td>
+            <td>{{stock.z}}</td>
+            <td>{{stock.tv}}</td>
+            <td>{{stock.v}}</td>
+            <td>{{stock.o}}</td>
+            <td>{{stock.h}}</td>
+            <td>{{stock.l}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+
+<!-- 舊版 -->
+<!--
+<table cellpadding="5" border='1'>
     <th *ngFor="let title of titles;">{{title}}</th>
 
     <tr *ngFor="let stock of msgArray; let serialNo = index;">
@@ -15,3 +50,4 @@
         <td>{{stock.l}}</td>
     </tr>
 </table>
+-->

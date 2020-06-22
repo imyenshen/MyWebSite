@@ -28,12 +28,16 @@ export class Item1Component implements OnInit {
   constructor(private getStockService:GetStockService) { }
 
   ngOnInit() {
-    this.getStockService.getStockByDateAndStockId().subscribe(
+    this.getStockService.getStockByDateAndStockId("2317").subscribe(
       (response: any) => {
         this.item = response;
         this.msgArray = response.msgArray;
         console.log(this.item);
       }
     );
+  }
+
+  doSearch(): void {
+    console.log("被按了~~~");
   }
 }
