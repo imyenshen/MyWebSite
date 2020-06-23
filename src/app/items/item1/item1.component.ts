@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetStockService } from 'src/app/website/service/get-stock.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-item1',
@@ -7,9 +8,12 @@ import { GetStockService } from 'src/app/website/service/get-stock.service';
   styleUrls: ['./item1.component.css']
 })
 export class Item1Component implements OnInit {
- // public item: Array<any> = new Array<any>();
+  // public item: Array<any> = new Array<any>();
 
-  public item:any;
+  _stockId = '';
+  _stockDate = '';
+
+  public item: any;
   public msgArray: Array<any> = new Array<any>();
 
   // 標題
@@ -25,19 +29,33 @@ export class Item1Component implements OnInit {
     '最低價'
   ];
 
-  constructor(private getStockService:GetStockService) { }
+  constructor(private getStockService: GetStockService) { }
 
   ngOnInit() {
-    this.getStockService.getStockByDateAndStockId("2317").subscribe(
+    const date = new Date();
+    const result = formatDate(date, 'yyyyMMdd', 'zh-tw');
+    this.getStockService.getStockByDateAndStockId(result, "2317").subscribe(
       (response: any) => {
         this.item = response;
         this.msgArray = response.msgArray;
-        console.log(this.item);
       }
     );
   }
 
   doSearch(): void {
-    console.log("被按了~~~");
+    var result = this._stockDate;
+    if (result == '' || result == null) {
+      const date = new Date();
+      result = formatDate(date, 'yyyyMMdd', 'zh-tw');
+    } else {
+      var result = formatDate(new Date(this._stockDate), 'yyyyMMdd', 'zh-tw');
+    }
+
+    this.getStockService.getStockByDateAndStockId(result, this._stockId).subscribe(
+      (response: any) => {
+        this.item = response;
+        this.msgArray = response.msgArray;
+      }
+    );
   }
 }

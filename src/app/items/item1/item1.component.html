@@ -1,11 +1,15 @@
-<!-- <p>台灣股票</p> -->
-
-<nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-    <input nz-input type="text" placeholder="輸入股票代號" />
-</nz-input-group>
-<ng-template #suffixIconButton>
-    <button nz-button nzType="primary" nzSearch (click)="doSearch()"><i nz-icon nzType="search"></i></button>
-</ng-template>
+<span>查詢條件</span>
+<div>
+    <nz-input-group nzCompact>
+        <nz-date-picker [(ngModel)]="_stockDate"></nz-date-picker>
+    </nz-input-group>
+    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+        <input nz-input type="text" placeholder="輸入股票代號,多筆請用&隔開" [(ngModel)]="_stockId" />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+        <button nz-button nzType="primary" nzSearch (click)="doSearch()"><i nz-icon nzType="search"></i></button>
+    </ng-template>
+</div>
 
 <br />
 <br />
