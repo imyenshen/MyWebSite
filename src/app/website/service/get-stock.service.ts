@@ -16,11 +16,7 @@ export class GetStockService {
   public getStockByDateAndStockId(pStockDate: string, pStockId: string): Observable<any> {
     /** 測試網站 */
     //const url = 'https://data.ntpc.gov.tw/api/datasets/4A03827A-588B-4058-AB21-EC02283E2BB7/json?page=0&size=100';
-
-    /*
-    let url = this.webUrl + "?ex_ch=" + "tse_1101.tw" + "|" + "tse_2317.tw" + "&d=20200528";
-    return this.http.get<any>(url);
-    */
+    //let url = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_1101.tw&d=20200528';
 
     let url = this.webUrl + "?ex_ch=";
 
@@ -36,9 +32,6 @@ export class GetStockService {
     }
 
     url = url + "&d=" + pStockDate;
-
-    // let url = this.webUrl + "?ex_ch=" + this.returnStockParameter(pStockId) + "&d=20200528";
-    // let url = this.webUrl + "?ex_ch=" + this.returnStockParameter(pStockId) + "&d=" + pStockDate;
     return this.http.get<any>(url);
   }
 

@@ -26,12 +26,14 @@
             <td>{{serialNo+1}}</td>
             <td>{{stock.c}}</td>
             <td>{{stock.n}}</td>
-            <td>{{stock.z}}</td>
             <td>{{stock.tv}}</td>
             <td>{{stock.v}}</td>
             <td>{{stock.o}}</td>
             <td>{{stock.h}}</td>
             <td>{{stock.l}}</td>
+            <td [ngStyle]="{'color': stock.z >= stock.o ? 'red' : 'green' }">{{stock.z}}</td>
+            <td>{{stock.y}}</td>
+            <td>{{stock.upAndDown}}%</td>
         </tr>
     </tbody>
 </nz-table>

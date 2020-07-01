@@ -8,12 +8,10 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./item1.component.css']
 })
 export class Item1Component implements OnInit {
-  // public item: Array<any> = new Array<any>();
 
   _stockId = '';
   _stockDate = '';
 
-  public item: any;
   public msgArray: Array<any> = new Array<any>();
 
   // 標題
@@ -21,12 +19,14 @@ export class Item1Component implements OnInit {
     '',
     '股票代號',
     '公司簡稱',
-    '當盤成交價',
     '當盤成交量',
     '累積成交量',
     '開盤價',
     '最高價',
-    '最低價'
+    '最低價',
+    '收盤價',
+    '昨收價',
+    '漲幅'
   ];
 
   constructor(private getStockService: GetStockService) { }
@@ -34,12 +34,7 @@ export class Item1Component implements OnInit {
   ngOnInit() {
     const date = new Date();
     const result = formatDate(date, 'yyyyMMdd', 'zh-tw');
-    this.getStockService.getStockByDateAndStockId(result, "2317").subscribe(
-      (response: any) => {
-        this.item = response;
-        this.msgArray = response.msgArray;
-      }
-    );
+    this.getStockByDateAndStockId(result,"2353");
   }
 
   doSearch(): void {
@@ -51,10 +46,22 @@ export class Item1Component implements OnInit {
       var result = formatDate(new Date(this._stockDate), 'yyyyMMdd', 'zh-tw');
     }
 
-    this.getStockService.getStockByDateAndStockId(result, this._stockId).subscribe(
+    this.getStockByDateAndStockId(result,this._stockId);
+  }
+
+  getStockByDateAndStockId (pDate:string,pStockId:string){
+    this.getStockService.getStockByDateAndStockId(pDate,pStockId).subscribe(
       (response: any) => {
-        this.item = response;
-        this.msgArray = response.msgArray;
+        const tStockData:Array<any> = response.msgArray;
+
+        // 計算漲幅
+        tStockData.forEach((data, index)=>{
+          var nowPrice = data.z; // 收盤價
+          var yesterdayPrice = data.y; // 昨收價
+          var tUpAndDown = (nowPrice - yesterdayPrice) / yesterdayPrice * 100;
+          data['upAndDown'] = tUpAndDown;
+        });
+        this.msgArray = tStockData;
       }
     );
   }
