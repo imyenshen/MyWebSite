@@ -26,7 +26,7 @@ export class Item1Component implements OnInit {
     '最低價',
     '收盤價',
     '昨收價',
-    '漲幅'
+    '漲幅%'
   ];
 
   constructor(private getStockService: GetStockService) { }

@@ -33,7 +33,7 @@
             <td>{{stock.l}}</td>
             <td [ngStyle]="{'color': stock.z >= stock.o ? 'red' : 'green' }">{{stock.z}}</td>
             <td>{{stock.y}}</td>
-            <td>{{stock.upAndDown}}%</td>
+            <td>{{stock.upAndDown | number:'1.1-2'}}</td>
         </tr>
     </tbody>
 </nz-table>
