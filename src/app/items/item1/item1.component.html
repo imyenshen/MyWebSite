@@ -28,12 +28,12 @@
             <td>{{stock.n}}</td>
             <td>{{stock.tv}}</td>
             <td>{{stock.v}}</td>
-            <td>{{stock.o}}</td>
-            <td>{{stock.h}}</td>
-            <td>{{stock.l}}</td>
-            <td [ngStyle]="{'color': stock.z >= stock.o ? 'red' : 'green' }">{{stock.z}}</td>
-            <td>{{stock.y}}</td>
-            <td>{{stock.upAndDown | number:'1.1-2'}}</td>
+            <td [ngStyle]="{'color': stock.o >= stock.y ? 'red' : 'green' }">{{stock.o | number:'0.1-2'}}</td>
+            <td [ngStyle]="{'color': stock.h >= stock.y ? 'red' : 'green' }">{{stock.h | number:'0.1-2'}}</td>
+            <td [ngStyle]="{'color': stock.l >= stock.y ? 'red' : 'green' }">{{stock.l | number:'0.1-2'}}</td>
+            <td [ngStyle]="{'color': stock.z >= stock.y ? 'red' : 'green' }">{{stock.z | number:'0.1-2'}}</td>
+            <td>{{stock.y | number:'0.1-2'}}</td>
+            <td [ngStyle]="{'color': 0 > stock.upAndDown ? 'green' : 'black' }">{{stock.upAndDown | number:'1.1-2'}}</td>
         </tr>
     </tbody>
 </nz-table>
