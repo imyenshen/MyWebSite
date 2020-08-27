@@ -13,6 +13,7 @@ import { ItemListComponent } from './item-list/item-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { Item1Component } from './items/item1/item1.component';
 import { Item2Component } from './items/item2/item2.component';
+import { StockQueryComponent } from './items/item1/stock-query/stock-query.component';
 
 registerLocaleData(zh);
 
@@ -22,7 +23,8 @@ registerLocaleData(zh);
     Item1Component,
     ItemListComponent,
     NavbarComponent,
-    Item2Component
+    Item2Component,
+    StockQueryComponent
   ],
   imports: [
     BrowserModule,

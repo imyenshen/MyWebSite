@@ -22,7 +22,7 @@
     </thead>
 
     <tbody>
-        <tr *ngFor="let stock of msgArray; let serialNo = index;">
+        <tr *ngFor="let stock of msgArray; let serialNo = index;" (click)="intoStockQuery(stock.c)">
             <td>{{serialNo+1}}</td>
             <td>{{stock.c}}</td>
             <td>{{stock.n}}</td>

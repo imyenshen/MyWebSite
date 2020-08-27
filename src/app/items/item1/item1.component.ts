@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetStockService } from 'src/app/website/service/get-stock.service';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-item1',
@@ -29,12 +30,12 @@ export class Item1Component implements OnInit {
     '漲幅%'
   ];
 
-  constructor(private getStockService: GetStockService) { }
+  constructor(private getStockService: GetStockService, private router: Router) { }
 
   ngOnInit() {
     const date = new Date();
     const result = formatDate(date, 'yyyyMMdd', 'zh-tw');
-    this.getStockByDateAndStockId(result,"2353");
+    this.getStockByDateAndStockId(result, "2353");
   }
 
   doSearch(): void {
@@ -46,16 +47,16 @@ export class Item1Component implements OnInit {
       var result = formatDate(new Date(this._stockDate), 'yyyyMMdd', 'zh-tw');
     }
 
-    this.getStockByDateAndStockId(result,this._stockId);
+    this.getStockByDateAndStockId(result, this._stockId);
   }
 
-  getStockByDateAndStockId (pDate:string,pStockId:string){
-    this.getStockService.getStockByDateAndStockId(pDate,pStockId).subscribe(
+  getStockByDateAndStockId(pDate: string, pStockId: string) {
+    this.getStockService.getStockByDateAndStockId(pDate, pStockId).subscribe(
       (response: any) => {
-        const tStockData:Array<any> = response.msgArray;
+        const tStockData: Array<any> = response.msgArray;
 
         // 計算漲幅
-        tStockData.forEach((data, index)=>{
+        tStockData.forEach((data, index) => {
           var nowPrice = data.z; // 收盤價
           var yesterdayPrice = data.y; // 昨收價
           var tUpAndDown = (nowPrice - yesterdayPrice) / yesterdayPrice * 100;
@@ -64,5 +65,9 @@ export class Item1Component implements OnInit {
         this.msgArray = tStockData;
       }
     );
+  }
+
+  intoStockQuery(pStockId: string) {
+    this.router.navigate(['/stockQuery', pStockId]);
   }
 }

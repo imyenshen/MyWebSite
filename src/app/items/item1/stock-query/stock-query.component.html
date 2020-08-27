@@ -1,0 +1,4 @@
+<p>股票代號 : {{stockId}}</p>
+<p>查詢日期區間</p>
+<nz-range-picker [nzRenderExtraFooter]="footerRender" [nzDisabledDate]="disabledDate" [(ngModel)]="_stockDate"></nz-range-picker>
+<button nz-button nzType="primary" (click)="doSearch()"><i nz-icon nzType="search"></i>Search</button>
